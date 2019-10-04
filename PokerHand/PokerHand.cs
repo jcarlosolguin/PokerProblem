@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace PokerHand
 {
@@ -10,6 +11,8 @@ namespace PokerHand
     public class PokerHand
     {
         public string PlayerName { get;}
+        public int HighestCard { get { return _highestCard; } }
+        private int _highestCard;
         private Dictionary<int,int> _cards;
         private int _nCards;
         private HandWinLevel _winLevel;
@@ -36,6 +39,7 @@ namespace PokerHand
         public PokerHand(string playerName)             
         {
             this.PlayerName = playerName;
+            _highestCard = -1;
             _cards = new Dictionary<int,int>();
             _nCards = 0;
             _sameSuit = true;
@@ -69,6 +73,11 @@ namespace PokerHand
 
             _nCards++;
 
+        }
+
+        public List<int> GetCardValues()
+        {
+            return _cards.Keys.OrderBy(x => x).ToList();
         }
 
         private void CheckSuit(char suit)
@@ -133,6 +142,7 @@ namespace PokerHand
                 switch (_cards.Count)
                 {
                     case 5:
+                        _highestCard = _cards.Keys.OrderBy(x => x).First();
                         if (_sameSuit)
                         {
                             _winLevel = HandWinLevel.Flush;
@@ -143,12 +153,15 @@ namespace PokerHand
                         }
                         break;
                     case 4:
+                        _highestCard = _cards.First(x => x.Value == 2).Key;
                         _winLevel = HandWinLevel.Pair;                   
                         break;
                     case 3:
+                        _highestCard = _cards.First(x => x.Value == 3).Key;
                         _winLevel = HandWinLevel.ThreeOfKind;
                         break;
                     case 2:
+                        _highestCard = _cards.First(x => x.Value == 4).Key;
                         _winLevel = HandWinLevel.ThreeOfKind;
                         break;
                     case 1:

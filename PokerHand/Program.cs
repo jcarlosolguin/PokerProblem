@@ -7,23 +7,21 @@ namespace PokerHand
     {
         public static void Main(string[] args)
         {
-            PokerHand _hand = new PokerHand("Carlos");
-            _hand.AddCard("8S");
-            _hand.AddCard("8D");
-            _hand.AddCard("AD");
+            PokerGame game = new PokerGame();
 
-            string line = Console.ReadLine();
-            int lineNumber = 1;
+            string player = Console.ReadLine();
+            string cards = Console.ReadLine();
 
-            while (!line.Equals(""))
+            while (!player.Equals("") && !cards.Equals(""))
             {
-                if(lineNumber % 2 != 0)
-                {
-                    //It's a name of player
-                }
+                game.AddPlayer(player, cards.Split(new char[]   {','}, StringSplitOptions.RemoveEmptyEntries));
+                player = Console.ReadLine();
+                cards = Console.ReadLine();
 
-                line = Console.ReadLine();
-                lineNumber++;
+            }
+            foreach(PokerHand p in game.GetWinners())
+            {
+                Console.Write(p.PlayerName + " wins");
             }
         }
     }
