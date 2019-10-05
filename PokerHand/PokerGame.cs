@@ -23,6 +23,11 @@ namespace PokerHand
                 throw new Exception("Number of players was exceeded.");
             }
 
+            if(cards.Length != 5)
+            {
+                throw new Exception("Wrong number of cards, got " + cards.Length);
+            }
+
             PokerHand player = new PokerHand(playerName);
             foreach(string card in cards)
             {

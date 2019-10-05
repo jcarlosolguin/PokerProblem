@@ -120,7 +120,7 @@ namespace PokerHand
             }
             if (cardValue > 14 || cardValue < 2)
             {
-                throw new Exception("Wrong card value [" + cardValue + "]. Value must be between 2 and 14.");
+                throw new Exception("Wrong card value [" + cardValue + "].");
             }
 
             if(suit != "c" && suit != "d" && suit != "h" && suit != "s")

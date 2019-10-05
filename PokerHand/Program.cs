@@ -10,18 +10,38 @@ namespace PokerHand
             PokerGame game = new PokerGame();
 
             string player = Console.ReadLine();
-            string cards = Console.ReadLine();
-
-            while (!player.Equals("") && !cards.Equals(""))
+            string cards = "";
+            if (!player.Equals(""))
             {
-                game.AddPlayer(player, cards.Split(new char[]   {','}, StringSplitOptions.RemoveEmptyEntries));
-                player = Console.ReadLine();
                 cards = Console.ReadLine();
-
             }
-            foreach(PokerHand p in game.GetWinners())
+
+            int nPlayers = 1;
+
+            try
             {
-                Console.Write(p.PlayerName + " wins");
+                while (!player.Equals("") && !cards.Equals("") && nPlayers <= 10)
+                {
+                    game.AddPlayer(player, cards.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries));
+
+                    player = Console.ReadLine();
+                    if (!player.Equals(""))
+                    {
+                        cards = Console.ReadLine();
+                    }
+
+                    nPlayers++;
+
+                }
+
+                foreach (PokerHand p in game.GetWinners())
+                {
+                    Console.WriteLine(p.PlayerName + " wins");
+                }
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine("Something went wrong. " + ex.Message);
             }
         }
     }

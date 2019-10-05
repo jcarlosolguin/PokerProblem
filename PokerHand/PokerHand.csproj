@@ -38,5 +38,8 @@
     <Compile Include="PokerHand.cs" />
     <Compile Include="Card.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="README.md" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
